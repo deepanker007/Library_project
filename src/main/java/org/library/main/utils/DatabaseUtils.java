@@ -7,9 +7,11 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.library.main.entity.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class DatabaseUtils {
 	
+	@Autowired
 	private DataSource dataSource;
 
 	
@@ -18,15 +20,16 @@ public class DatabaseUtils {
 	}
 
 	public void insert(Book book) {
-		String sql = "INSERT INTO BOOK"+"(ID, GENRE, AUTHOR, PAGES) VALUES (?, ? ,?)";
+		String sql = "INSERT INTO BOOK"+"(ID, NAME, GENRE, AUTHOR, PAGES) VALUES (?, ?, ? ,?)";
 		Connection connection = null;
 		try {
 			connection = dataSource.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, book.getId());
-			ps.setString(2, book.getGenre());
-			ps.setString(3, book.getAuthor());
-			ps.setInt(4, book.getPages());
+			ps.setString(2, book.getName());
+			ps.setString(3, book.getGenre());
+			ps.setString(4, book.getAuthor());
+			ps.setInt(5, book.getPages());
 			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
