@@ -20,7 +20,7 @@ public class DatabaseUtils {
 	}
 
 	public void insert(Book book) {
-		String sql = "INSERT INTO BOOK"+"(ID, NAME, GENRE, AUTHOR, PAGES) VALUES (?, ?, ? ,?)";
+		String sql = "INSERT INTO BOOK"+"(ID, NAME, GENRE, AUTHOR, PAGES) VALUES (?, ?, ?, ? ,?)";
 		Connection connection = null;
 		try {
 			connection = dataSource.getConnection();
